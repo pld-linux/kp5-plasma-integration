@@ -33,7 +33,9 @@ BuildRequires:	kf5-knotifyconfig-devel
 BuildRequires:	kf5-kpeople-devel
 BuildRequires:	kf5-krunner-devel
 BuildRequires:	kf5-kwallet-devel
+BuildRequires:	kf5-kwayland-devel
 BuildRequires:	kf5-plasma-framework-devel
+BuildRequires:	kp5-breeze-devel
 BuildRequires:	ninja
 BuildRequires:	rpmbuild(macros) >= 1.164
 BuildRequires:	xorg-driver-input-evdev-devel

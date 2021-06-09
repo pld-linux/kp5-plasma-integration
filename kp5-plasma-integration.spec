@@ -1,18 +1,18 @@
 # TODO:
 # PackageKit qt5
 #
-%define		kdeplasmaver	5.21.5
+%define		kdeplasmaver	5.22.0
 %define		qtver		5.9.0
 %define		kpname		plasma-integration
 
 Summary:	KDE Plasma Integration
 Name:		kp5-%{kpname}
-Version:	5.21.5
+Version:	5.22.0
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	4da99190c71f165585ac8c74a8aaae9c
+# Source0-md5:	96375370516f5275f47668620fd0909f
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
@@ -49,6 +49,18 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 KDE Plasma Integration.
 
+%package devel
+Summary:	Header files for %{kpname} development
+Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kpname}
+Group:		X11/Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description devel
+Header files for %{kpname} development.
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe dla programistów używających %{kpname}.
+
 %prep
 %setup -q -n %{kpname}-%{version}
 
@@ -75,6 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{kpname}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/qt5/plugins/platformthemes/KDEPlasmaPlatformTheme.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/platforminputcontexts/plasmaimplatforminputcontextplugin.so
 %{_datadir}/kconf_update/fonts_akregator.pl
 %{_datadir}/kconf_update/fonts_akregator.upd
 %{_datadir}/kconf_update/fonts_global.pl
@@ -82,3 +95,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kconf_update/fonts_global_toolbar.upd
 %{_datadir}/kconf_update/fonts_kate.pl
 %{_datadir}/kconf_update/fonts_kate.upd
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/PlasmaKeyData
+%{_pkgconfigdir}/plasma-key-data.pc

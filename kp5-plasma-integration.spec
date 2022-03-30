@@ -1,18 +1,21 @@
+#
+# Conditional build:
+%bcond_with	tests		# build with tests
 # TODO:
 # PackageKit qt5
 #
-%define		kdeplasmaver	5.24.3
+%define		kdeplasmaver	5.24.4
 %define		qtver		5.15.2
 %define		kpname		plasma-integration
 
 Summary:	KDE Plasma Integration
 Name:		kp5-%{kpname}
-Version:	5.24.3
+Version:	5.24.4
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	5cbfc4b8d729e0334e6c13a98f6017ed
+# Source0-md5:	edf1f5488788670935335797a21e53ce
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Quick-controls2-devel >= %{qtver}
@@ -69,9 +72,14 @@ Pliki nagłówkowe dla programistów używających %{kpname}.
 install -d build
 cd build
 %cmake -G Ninja \
+	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
 	../
 %ninja_build
+
+%if %{with tests}
+ctest
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT

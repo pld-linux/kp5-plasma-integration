@@ -4,18 +4,18 @@
 # TODO:
 # PackageKit qt5
 #
-%define		kdeplasmaver	5.25.0
+%define		kdeplasmaver	5.25.1
 %define		qtver		5.15.2
 %define		kpname		plasma-integration
 
 Summary:	KDE Plasma Integration
 Name:		kp5-%{kpname}
-Version:	5.25.0
+Version:	5.25.1
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	0d7c677461796d8d9e5c1d8b7b20dc93
+# Source0-md5:	bba667ca6bd8c2ed187e86ee014b80cd
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Quick-controls2-devel >= %{qtver}

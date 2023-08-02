@@ -4,22 +4,22 @@
 # TODO:
 # PackageKit qt5
 #
-%define		kdeplasmaver	5.27.6
+%define		kdeplasmaver	5.27.7
 %define		qtver		5.15.2
 %define		kpname		plasma-integration
 
 Summary:	KDE Plasma Integration
 Name:		kp5-%{kpname}
-Version:	5.27.6
+Version:	5.27.7
 Release:	1
 License:	LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/plasma/%{kdeplasmaver}/%{kpname}-%{version}.tar.xz
-# Source0-md5:	e0b2631308d74e542f67166bb82372d2
+# Source0-md5:	3e8fd694b222d4d6c3d4e2b952099fb0
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Quick-controls2-devel >= %{qtver}
-BuildRequires:	cmake >= 2.8.12
+BuildRequires:	cmake >= 3.16.0
 BuildRequires:	fontconfig-devel
 BuildRequires:	kf5-attica-devel
 BuildRequires:	kf5-kactivities-stats-devel
@@ -69,13 +69,11 @@ Pliki nagłówkowe dla programistów używających %{kpname}.
 %setup -q -n %{kpname}-%{version}
 
 %build
-install -d build
-cd build
-%cmake -G Ninja \
+%cmake -B build \
+	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-	../
-%ninja_build
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+%ninja_build -C build
 
 %if %{with tests}
 ctest
